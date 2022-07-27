@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         {
             if(canJump == true)
             {
-                rb.AddForce(new Vector2(-speed * Time.deltaTime,  0));
+                rb.AddForce(new Vector2(-speed * 10 * Time.deltaTime,  0));
             }
           
         }
@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
         {
             if (canJump == true)
             {
-                rb.AddForce(new Vector2(speed  * Time.deltaTime, 0));
+                rb.AddForce(new Vector2(speed * 10  * Time.deltaTime, 0));
             }
           
         }
@@ -69,9 +69,17 @@ public class Movement : MonoBehaviour
     {
         if(canJump == true)
         {
+            //catJump();
             if (Input.GetKey(KeyCode.Space))
             {
+                canJump = false;
+                
                 rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+                new WaitForSeconds(1.5f);
+                canJump = true;
+                //new WaitForSeconds(1);
+                //rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+                //new WaitForSeconds(1.5f);
             }
 
             //float h = Input.GetAxisRaw("Horizontal");
@@ -84,5 +92,18 @@ public class Movement : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         return raycastHit.collider != null;
+    }
+
+    public void catJump()
+    {
+        
+        
+        rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+        new WaitForSeconds(1.5f);
+        canJump = true;
+    }
+    public wait()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }

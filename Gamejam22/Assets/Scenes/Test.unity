@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e36ef392c6ba747a4fa4ca3681b251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 2
+  jumpHeight: 20
   speed: 600
   groundLayer:
     serializedVersion: 2
@@ -334,7 +334,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.99133754}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &855720210
 Rigidbody2D:
@@ -349,7 +349,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0
   m_GravityScale: 2.5
   m_Material: {fileID: 0}
@@ -381,7 +381,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9906831, y: 0.99742866}
+  m_Size: {x: 0.53, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1501367231
 GameObject:
