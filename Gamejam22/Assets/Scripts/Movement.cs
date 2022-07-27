@@ -8,6 +8,9 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed = 10.0f;
     [SerializeField] private LayerMask groundLayer;
     private BoxCollider2D boxCollider;
+    public bool jumpReady;
+    public float jumpCD = 1.2f;
+    public float jumpCDCurrent = 0.0f;
 
     float inputX;
 
@@ -73,6 +76,8 @@ public class Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 canJump = false;
+
+                jumpCDCurrent = 0.0f;
                 
                 rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
                 new WaitForSeconds(1.5f);
@@ -80,11 +85,26 @@ public class Movement : MonoBehaviour
                 //new WaitForSeconds(1);
                 //rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
                 //new WaitForSeconds(1.5f);
+                Debug.Log("Test");
             }
 
             //float h = Input.GetAxisRaw("Horizontal");
             // float v = Input.GetAxisRaw("Jump");
             // gameObject.transform.position = new Vector2(transform.position.x + (h * speed), transform.position.y + (v * jumpHeight));
+        }
+
+        if(jumpCDCurrent >= jumpCD)
+        {
+
+            jumpReady = true;
+        }
+        else
+        {
+            jumpCDCurrent += Time.deltaTime;
+
+            jumpReady = false;
+
+            jumpCDCurrent = Mathf.Clamp(jumpCDCurrent, 0.0f, jumpCD);
         }
     }
 
@@ -102,8 +122,5 @@ public class Movement : MonoBehaviour
         new WaitForSeconds(1.5f);
         canJump = true;
     }
-    public wait()
-    {
-        yield return new WaitForSeconds(1f);
-    }
+    
 }

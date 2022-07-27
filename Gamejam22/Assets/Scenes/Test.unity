@@ -304,11 +304,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e36ef392c6ba747a4fa4ca3681b251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 20
+  jumpHeight: 10
   speed: 600
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpReady: 0
+  jumpCD: 1.2
+  jumpCDCurrent: 0
   canJump: 0
 --- !u!61 &855720209
 BoxCollider2D:
