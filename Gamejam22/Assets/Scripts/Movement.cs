@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -7,6 +6,8 @@ public class Movement : MonoBehaviour
 
     [SerializeField] float jumpHeight = 0f;
     [SerializeField] float speed = 10.0f;
+    [SerializeField] private LayerMask groundLayer;
+    private BoxCollider2D boxCollider;
 
     float inputX;
 
@@ -15,6 +16,8 @@ public class Movement : MonoBehaviour
     Rigidbody2D rb;
    
     public bool canJump = false;
+
+   
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,8 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
 
-       // float h = Input.GetAxisRaw("Horizontal");
+
+        // float h = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetKey(KeyCode.A))
         {
@@ -74,7 +78,11 @@ public class Movement : MonoBehaviour
             // float v = Input.GetAxisRaw("Jump");
             // gameObject.transform.position = new Vector2(transform.position.x + (h * speed), transform.position.y + (v * jumpHeight));
         }
-        
+    }
 
+    private bool isGrounded()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        return raycastHit.collider != null;
     }
 }

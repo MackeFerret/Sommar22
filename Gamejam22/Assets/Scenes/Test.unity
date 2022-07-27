@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 855720208}
   - component: {fileID: 855720211}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,8 +304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e36ef392c6ba747a4fa4ca3681b251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 30
+  jumpHeight: 2
   speed: 600
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   canJump: 0
 --- !u!61 &855720209
 BoxCollider2D:
@@ -317,10 +320,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0014576912}
+  m_Offset: {x: 0, y: 0.004331231}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -331,7 +334,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.0029154}
+  m_Size: {x: 1, y: 0.99133754}
   m_EdgeRadius: 0
 --- !u!50 &855720210
 Rigidbody2D:
@@ -348,7 +351,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 2.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -364,10 +367,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0021965504, y: 0.0012856722}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -378,7 +381,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.67, y: 1}
+  m_Size: {x: 0.9906831, y: 0.99742866}
   m_EdgeRadius: 0
 --- !u!1 &1501367231
 GameObject:
@@ -391,9 +394,9 @@ GameObject:
   - component: {fileID: 1501367233}
   - component: {fileID: 1501367232}
   - component: {fileID: 1501367234}
-  m_Layer: 0
-  m_Name: Square (2)
-  m_TagString: Untagged
+  m_Layer: 6
+  m_Name: Ground 1
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -476,7 +479,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0068094283, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -487,7 +490,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9863812, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1848067598
 GameObject:
@@ -500,8 +503,8 @@ GameObject:
   - component: {fileID: 1848067600}
   - component: {fileID: 1848067599}
   - component: {fileID: 1848067601}
-  m_Layer: 0
-  m_Name: Square (1)
+  m_Layer: 6
+  m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
