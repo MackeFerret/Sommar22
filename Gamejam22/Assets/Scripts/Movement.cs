@@ -5,6 +5,8 @@ public class Movement : MonoBehaviour
 {
 
     [SerializeField] float jumpHeight = 0f;
+    [SerializeField] float jumpHeightx = 0f;
+    public float jumpx;
     [SerializeField] float speed = 10.0f;
     [SerializeField] private LayerMask groundLayer;
     private BoxCollider2D boxCollider;
@@ -13,6 +15,9 @@ public class Movement : MonoBehaviour
     public float jumpCDCurrent = 0.0f;
 
     float inputX;
+
+    public bool left = false;
+   public bool right = false;
 
     LayerMask ground;
 
@@ -43,20 +48,57 @@ public class Movement : MonoBehaviour
         {
             if(canJump == true)
             {
+                
                 rb.AddForce(new Vector2(-speed * 50 * Time.deltaTime,  0));
+                if (canJump == true && (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.A)))
+                {
+                    left = true;
+                    if (left == true)
+                    {
+
+                        canJump = false;
+                        Invoke("catJumpLeft", 0.5f);
+                       
+                    }
+
+                }
             }
           
         }
+        else
+        left = false;
         if (Input.GetKey(KeyCode.D))
         {
             if (canJump == true)
             {
-                rb.AddForce(new Vector2(speed * 50  * Time.deltaTime, 0));
-            }
-          
-        }
+              
+                rb.AddForce(new Vector2(speed * 50 * Time.deltaTime, 0));
+                if (canJump == true && (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.D)))
+                {
 
-            jump();
+                    right = true;
+                    {
+                        if (right == true)
+                        {
+                            canJump = false;
+                            Invoke("catJumpRight", 0.5f);
+                          
+                        }
+                    }
+
+
+
+                }
+            }
+
+        }
+        else
+            right = false;
+
+      
+
+
+       jump();
     }
 
 
@@ -71,7 +113,7 @@ public class Movement : MonoBehaviour
     }
     void jump()
     {
-        if (canJump == true)
+        if (canJump == true && left == false && right == false)
         {
             //catJump();
             if (Input.GetKey(KeyCode.Space))
@@ -83,27 +125,8 @@ public class Movement : MonoBehaviour
             }
 
         }
-        if (canJump == true)
-        {
-            if (Input.GetKey(KeyCode.Space) && Input.GetKeyDown(KeyCode.A))
-            {
-                canJump = false;
-                Invoke("catJumpLeft", 0.5f);
-
-
-            }
-        }
-        if (canJump == true)
-        {
-            if (Input.GetKey(KeyCode.Space) && Input.GetKeyDown(KeyCode.D))
-            {
-                canJump = false;
-                Invoke("catJumpRight", 0.5f);
-
-
-
-            }
-        }
+  
+       
     }
     private bool isGrounded()
     {
@@ -116,17 +139,22 @@ public class Movement : MonoBehaviour
 
         rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
         Invoke("timer", 0.5f);
+        print("mid");
     }
     public void catJumpLeft()
     {
-        //rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
-        rb.AddForce(new Vector2(-speed * 75 * Time.deltaTime, 0));
+
+
+       
+        rb.AddForce(new Vector2(-jumpx * 10, jumpHeightx*10));
         Invoke("timer", 0.5f);
+        print("left");
     }
     public void catJumpRight()
     {
-        //rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
-        rb.AddForce(new Vector2(speed * 75 * Time.deltaTime, 0));
+        rb.AddForce(new Vector2(jumpx * 10, jumpHeightx*10));
+
+        print("right");
         Invoke("timer", 0.5f);
     }
     public void timer()
