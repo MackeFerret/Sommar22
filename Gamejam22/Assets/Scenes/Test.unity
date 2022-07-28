@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 10
-  speed: 600
+  speed: 6
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

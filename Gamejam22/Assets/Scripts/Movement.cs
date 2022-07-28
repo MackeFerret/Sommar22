@@ -43,7 +43,7 @@ public class Movement : MonoBehaviour
         {
             if(canJump == true)
             {
-                rb.AddForce(new Vector2(-speed * 10 * Time.deltaTime,  0));
+                rb.AddForce(new Vector2(-speed * 50 * Time.deltaTime,  0));
             }
           
         }
@@ -51,13 +51,14 @@ public class Movement : MonoBehaviour
         {
             if (canJump == true)
             {
-                rb.AddForce(new Vector2(speed * 10  * Time.deltaTime, 0));
+                rb.AddForce(new Vector2(speed * 50  * Time.deltaTime, 0));
             }
           
         }
 
             jump();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -70,44 +71,37 @@ public class Movement : MonoBehaviour
     }
     void jump()
     {
-        if(canJump == true)
+        if (canJump == true)
         {
             //catJump();
             if (Input.GetKey(KeyCode.Space))
             {
                 canJump = false;
+                Invoke("catJump", 0.5f);
 
-                jumpCDCurrent = 0.0f;
-                
-                rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
-                new WaitForSeconds(1.5f);
-                canJump = true;
-                //new WaitForSeconds(1);
-                //rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
-                //new WaitForSeconds(1.5f);
                 Debug.Log("Test");
             }
 
-            //float h = Input.GetAxisRaw("Horizontal");
-            // float v = Input.GetAxisRaw("Jump");
-            // gameObject.transform.position = new Vector2(transform.position.x + (h * speed), transform.position.y + (v * jumpHeight));
         }
-
-        if(jumpCDCurrent >= jumpCD)
+        if (canJump == true)
         {
+            if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.A))
+            {
+                canJump = false;
+                Invoke("catJumpLeft", 0.5f);
 
-            jumpReady = true;
+            }
         }
-        else
+        if (canJump == true)
         {
-            jumpCDCurrent += Time.deltaTime;
+            if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.D))
+            {
+                canJump = false;
+                Invoke("catJumpRight", 0.5f);
 
-            jumpReady = false;
-
-            jumpCDCurrent = Mathf.Clamp(jumpCDCurrent, 0.0f, jumpCD);
+            }
         }
     }
-
     private bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
@@ -116,11 +110,25 @@ public class Movement : MonoBehaviour
 
     public void catJump()
     {
-        
-        
+
         rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
-        new WaitForSeconds(1.5f);
-        canJump = true;
+        Invoke("timer", 0.5f);
+    }
+    public void catJumpLeft()
+    {
+        //rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(-speed * 75 * Time.deltaTime, 0));
+        Invoke("timer", 0.5f);
+    }
+    public void catJumpRight()
+    {
+        //rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(speed * 75 * Time.deltaTime, 0));
+        Invoke("timer", 0.5f);
+    }
+    public void timer()
+    {
+
     }
     
 }
