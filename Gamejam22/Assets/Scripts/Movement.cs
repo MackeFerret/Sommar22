@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
     // Update is called once per frame
     void Update()
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
         
 
 
-        rb = GetComponent<Rigidbody2D>();
+      
 
 
 
@@ -79,25 +79,28 @@ public class Movement : MonoBehaviour
                 canJump = false;
                 Invoke("catJump", 0.5f);
 
-                Debug.Log("Test");
+               
             }
 
         }
         if (canJump == true)
         {
-            if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.Space) && Input.GetKeyDown(KeyCode.A))
             {
                 canJump = false;
                 Invoke("catJumpLeft", 0.5f);
 
+
             }
         }
         if (canJump == true)
         {
-            if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.Space) && Input.GetKeyDown(KeyCode.D))
             {
                 canJump = false;
                 Invoke("catJumpRight", 0.5f);
+
+
 
             }
         }
