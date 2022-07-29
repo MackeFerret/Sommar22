@@ -13,10 +13,13 @@ public class Movement : MonoBehaviour
     public bool jumpReady;
     public float jumpCD = 1.2f;
     public float jumpCDCurrent = 0.0f;
+    private Animator anim;
+    private bool grounded;
+    private Rigidbody2D body;
 
     float inputX;
 
-    public bool left = false;
+   public bool left = false;
    public bool right = false;
 
     LayerMask ground;
@@ -30,15 +33,25 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        body = GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+
+        if (horizontalInput > 0.01f)
+            transform.localScale = Vector3.one;
+        else if (horizontalInput < -0.01f)
+            transform.localScale = new Vector3(-1, 1, 1);
+
+
+        anim.SetBool("Cat idle", horizontalInput != 0);
         
-
-
-      
+       // anim.SetTrigger("jump");
 
 
 
@@ -95,16 +108,42 @@ public class Movement : MonoBehaviour
         else
             right = false;
 
+
+
+        if (Input.GetKey(KeyCode.Space) && grounded)
+        {
+            jump();
+            anim.SetTrigger("Grounded");
+        }
+        
+
+
+    }
+
+    private void Jump()
+    {
+        body.velocity = new Vector2(body.velocity.x, speed);
+        grounded = false;
       
 
+    }
 
-       jump();
+
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+            grounded = true;
+
     }
 
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         canJump = true;
+
   
     }
     private void OnTriggerExit2D(Collider2D collision)
